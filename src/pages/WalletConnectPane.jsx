@@ -16,6 +16,7 @@ export const WalletConnectPane = () => {
   const { setVisible } = useWalletModal();
 
   const showWalletModal = () => {
+    console.log("aaa")
     setVisible(true);
   };
 
