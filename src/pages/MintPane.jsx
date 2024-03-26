@@ -16,6 +16,7 @@ import metadata from "../assets/metada.json";
 import { NFT_META_URI } from "../App.jsx";
 import {LoadingButton} from "../components/LoadingButton.jsx";
 
+
 /**
  * MintPane コンポーネント
  * NFTのミント機能を提供するコンポーネント
@@ -32,7 +33,14 @@ export const MintPane = () => {
 
   // NFTをミントするハンドラー関数
   const mintNft = async () => {
-
+        const builder = createNft(umi, {
+             mint: generateSigner(umi),
+             name: metadata.name,
+             uri: NFT_META_URI,
+             sellerFeeBasisPoints: percentAmount(0),
+        });
+        const { signature } = await builder.sendAndConfirm(umi);
+        setSignature(signature);
   };
 
   return (
